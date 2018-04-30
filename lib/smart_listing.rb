@@ -61,17 +61,6 @@ module SmartListing
 
       set_param(:per_page, @per_page, cookies) if @options[:memorize_per_page]
 
-      @count = @collection.size
-      @count = @count.length if @count.is_a?(Hash)
-
-      # Reset @page if greater than total number of pages
-      if @per_page > 0
-        no_pages = (@count.to_f / @per_page.to_f).ceil.to_i
-        if @page.to_i > no_pages
-          @page = no_pages
-        end
-      end
-
       if @options[:array]
         if @sort && !@sort.empty? # when array we sort only by first attribute
           i = sort_keys.index{|x| x[0] == @sort.to_h.first[0]}
